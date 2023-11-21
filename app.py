@@ -68,7 +68,7 @@ class_labels = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9','A', 'B', 'C', 
 
 # Streamlit app
 def main():
-    st.title("Your Image Classification Model Deployment")
+    st.title("Image Classification Model Deployment")
 
     # User input for image upload
     uploaded_image = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
