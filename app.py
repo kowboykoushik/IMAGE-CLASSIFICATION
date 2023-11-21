@@ -66,33 +66,33 @@ model.eval()
 class_labels = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9','A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J','K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
 'U', 'V', 'W', 'X', 'Y', 'Z']
 
-# Streamlit app
+
 def main():
     st.title("Image Classification Model Deployment")
 
-    # User input for image upload
+    
     uploaded_image = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
 
     if uploaded_image is not None:
-        # Display the uploaded image
+        
         st.image(uploaded_image, caption="Uploaded Image.", use_column_width=True)
 
-        # Preprocess the image for prediction
+        
         image = Image.open(uploaded_image)
         transformed_image = preprocess_image(image)
 
-        # Make predictions using your model
+        
         with torch.no_grad():
             prediction = make_prediction(transformed_image, model)
 
-        # Display the prediction
+        
         st.success(f"Prediction: {class_labels[prediction]}")
 
 def preprocess_image(image):
     if image.mode != 'RGB':
         image = image.convert('RGB')
 
-    # Preprocess the image for prediction
+    
     transform = transforms.Compose([
         transforms.Resize((28, 28)),
         transforms.ToTensor(),
@@ -100,7 +100,7 @@ def preprocess_image(image):
     return transform(image).unsqueeze(0)
 
 def make_prediction(image, model):
-    # Make predictions using your model
+    
     with torch.no_grad():
         prediction = model(image).argmax().item()
     return prediction
